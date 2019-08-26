@@ -1,0 +1,10 @@
+Package: ATTACH
+Title: Predict catch from ABC
+Version: 1.0.0
+Authors@R: person("Amanda", "Faig", email = "afaig@u.washington.edu", role = c("aut", "cre"))
+Description: Predict commercial catch from ABC in the EBS.
+Depends: R (>= 3.4.2)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
