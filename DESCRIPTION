@@ -1,6 +1,6 @@
 Package: ATTACH
 Title: Predict catch from ABC
-Version: 1.0.0
+Version: 1.0.0.9000
 Authors@R: person("Amanda", "Faig", email = "afaig@u.washington.edu", role = c("aut", "cre"))
 Description: Predict commercial catch from ABC in the EBS.
 Depends: R (>= 3.4.2)
