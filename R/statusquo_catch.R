@@ -3,11 +3,13 @@ statusquo_catch <- function(ABC.DATA,scenario) {
     if (scenario == 1 | scenario == 2 | scenario == 3) {
         FISH.DATA <- ABC.DATA
         FISH.DATA$ABCboth <- FISH.DATA$ABC.BSAI.202 + FISH.DATA$ABC.BS.201
+        FISH.DATA$ABCboth2 <- <- pmin(FISH.DATA$ABCboth,1.5e6)
         FISH.DATA$ABCboth.UB.150 <- as.numeric(FISH.DATA$ABC.BS.201 + FISH.DATA$ABC.BSAI.202 >= 1.5e6)
         FISH.DATA$pollock.bs.UB <-  as.numeric(FISH.DATA$ABC.BS.201 > 1.2e6)
     }   else if (scenario == 1.1) {
         FISH.DATA <- log(ABC.DATA)
         FISH.DATA$ABCboth <- exp(FISH.DATA$ABC.BSAI.202) + exp(FISH.DATA$ABC.BS.201)
+        FISH.DATA$ABCboth2 <- <- pmin(FISH.DATA$ABCboth,1.5e6)
         FISH.DATA$ABCboth.UB.150 <- as.numeric(exp(FISH.DATA$ABC.BS.201) + exp(FISH.DATA$ABC.BSAI.202) >= 1.5e6)
         FISH.DATA$pollock.bs.UB <-  as.numeric(exp(ABC.DATA$ABC.BS.201) > 1.2e6)
     } 
