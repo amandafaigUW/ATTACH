@@ -453,18 +453,18 @@ predict.tac.function <- function(predictmethod ,model,fit,FISH.DATA){
 predict.catch.function <- function(model,fit,FISH.DATA) {
     # Preamble ####   
     SUR<- F
-    NOSUR <- F
+    OLS <- F
     FLATSUR <- F
     SUR_FFDOM<- F
-    NOSUR_FFDOM <- F
+    OLS_FFDOM <- F
     FLATSUR_FFDOM <- F
     
     if (model == "SUR") {
         SUR <- T
     }
     
-    if (model == "NOSUR" ) {
-        NOSUR <- T
+    if (model == "OLS" ) {
+        OLS <- T
     }
     
     if (model == "FLATSUR") {
@@ -479,8 +479,8 @@ predict.catch.function <- function(model,fit,FISH.DATA) {
         SUR_FFDOM <- T
     }
     
-    if (model == "NOSUR_FFDOM" ) {
-        NOSUR_FFDOM <- T
+    if (model == "OLS_FFDOM" ) {
+        OLS_FFDOM <- T
     }
     
 
@@ -617,7 +617,7 @@ predict.catch.function <- function(model,fit,FISH.DATA) {
     }
     
     # Make Predictions ####    
-    if (NOSUR | NOSUR_FFDOM) {
+    if (OLS | OLS_FFDOM) {
         PREDICTIONS <- data.frame(CATCH.BS.60=0)   #PTAC stands for predicted TAC
         
            # Octopus
@@ -847,7 +847,7 @@ predict.catch.function <- function(model,fit,FISH.DATA) {
         # Plaice
         PREDICTIONS$CATCH.BS.106 <- pmin(predict(fit[[19]], FISH.DATA),pmin(pmax(log(FISH.DATA$TAC.BSAI.106), 13.3e3), log(FISH.DATA$ABC.BSAI.106))) # No AI
     }
-    if (NOSUR_FFDOM | SUR_FFDOM | FLATSUR_FFDOM) {
+    if (OLS_FFDOM | SUR_FFDOM | FLATSUR_FFDOM) {
         # Yellowfin
         PREDICTIONS$CATCH.BS.140 <- pmin(log(1.3) + PREDICTIONS$CATCH.BS.140,pmin(log(FISH.DATA$TAC.BSAI.140 + 3700), log(FISH.DATA$ABC.BSAI.140))) # No AI
         # Arrowtooth

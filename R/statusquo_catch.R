@@ -40,52 +40,58 @@ statusquo_catch <- function(ABC.DATA,scenario) {
         TAC.BOTHBIND <- predict.tac.function(predictmethod = 1, model="SUR",fit=tac_BOTHBIND_loglin_sur,FISH.DATA)
         
         CATCH.BOTHBIND.SURSUR <- predict.catch.function(model="SUR",fit=catch_BOTHBIND_loglin_sur,TAC.BOTHBIND )
-        CATCH.BOTHBIND.SUROLS <- predict.catch.function(model="NOSUR",fit = catch_BOTHBIND_loglin_nosur,TAC.BOTHBIND )
+        CATCH.BOTHBIND.SUROLS <- predict.catch.function(model="OLS",fit = catch_BOTHBIND_loglin_ols,TAC.BOTHBIND )
         
-        TAC.BOTHBIND.FLATSUR <- predict.tac.function(predictmethod = 1, model="FLATSUR",fit=tac_BOTHBIND_FLATSUR_loglin_sur,FISH.DATA)
+        TAC.BOTHBINDICATOR.SUR <- predict.tac.function(predictmethod = 1, model="SUR",fit=tac_BOTHBINDICATOR_loglin_sur,FISH.DATA)
         
-        CATCH.BOTHBIND.FLATSUR.SURSUR <- predict.catch.function(model="FLATSUR",fit=catch_BOTHBIND_FLATSUR_loglin_sur,TAC.BOTHBIND.FLATSUR )
+        CATCH.BOTHBINDICATOR.SUROLS <- predict.catch.function(model="OLS",fit=catch_BOTHBINDICATOR_loglin_ols,TAC.BOTHBIND.FLATSUR)
         
-    } else if (scenario == 1.1) {
-        TAC.BOTHBIND <- predict.tac.function(scenario = 1.1,model="SUR",fit=tac_BOTHBIND_sur,FISH.DATA)
+        TAC.BOTHBIND.NOFIRSTYEAR.SUR <- predict.tac.function(predictmethod = 1, model="SUR",fit=tac_BOTHBIND_NOFIRSTYEAR_loglin_sur,FISH.DATA)
         
-        CATCH.BOTHBIND.SURSUR <- predict.catch.function(model="SUR",fit=catch_BOTHBIND_sur,TAC.BOTHBIND )
-        CATCH.BOTHBIND.SUROLS <- predict.catch.function(model="NOSUR",fit = catch_BOTHBIND_nosur,TAC.BOTHBIND )
-        
-        TAC.BOTHBIND.FLATSUR <- predict.tac.function(scenario = 1.1,model="FLATSUR",fit=tac_BOTHBIND_FLATSUR_sur,FISH.DATA)
-        
-        CATCH.BOTHBIND.FLATSUR.SURSUR <- predict.catch.function(model="FLATSUR",fit=catch_BOTHBIND_FLATSUR_sur,TAC.BOTHBIND.FLATSUR )
+        CATCH.BOTHBIND.NOFIRSTYEAR.SUROLS <- predict.catch.function(model="OLS",fit=catch_BOTHBIND_NOFIRSTYEAR_loglin_ols,TAC.BOTHBIND.FLATSUR)
         
     } else if (scenario == 2) {
-        #whitefish dom
-        TAC.BOTHBIND.FLATSUR.whitefishdom <- predict.tac.function(predictmethod = 1, model="FLAT_WFDOM",fit=tac_BOTHBIND_FLATSUR_loglin_sur,FISH.DATA)
-        TAC.BOTHBIND.FLATSUR.whitefishdom$ABCboth.UB.150 <- as.numeric(TAC.BOTHBIND.FLATSUR.whitefishdom$ABC.BS.201 + TAC.BOTHBIND.FLATSUR.whitefishdom$ABC.BSAI.202 >= 1.50e6*1.1)
- 
-        TAC.BOTHBIND.whitefishdom <- predict.tac.function(predictmethod = 1,model="SUR_WFDOM",fit=tac_BOTHBIND_loglin_sur,FISH.DATA)
-        TAC.BOTHBIND.whitefishdom$ABCboth.UB.150 <- as.numeric(TAC.BOTHBIND.whitefishdom$ABC.BS.201 + TAC.BOTHBIND.whitefishdom$ABC.BSAI.202 >= 1.50e6*1.1)
+        #whitefish gets more TAC
+        TAC.BOTHBIND <- predict.tac.function(predictmethod = 1, model="SUR_WFDOM",fit=tac_BOTHBIND_loglin_sur,FISH.DATA)
+        TAC.BOTHBIND$ABCboth.UB.150 <- as.numeric(TAC.BOTHBIND$ABC.BS.201 + TAC.BOTHBIND$ABC.BSAI.202 >= 1.50e6*1.1)
         
-       CATCH.BOTHBIND.SURSUR <- predict.catch.function(model="SUR",fit=catch_BOTHBIND_loglin_sur,TAC.BOTHBIND.whitefishdom )
-        CATCH.BOTHBIND.SUROLS <- predict.catch.function(model="NOSUR",fit = catch_BOTHBIND_loglin_nosur,TAC.BOTHBIND.whitefishdom )
-        CATCH.BOTHBIND.FLATSUR.SURSUR <- predict.catch.function(model="FLATSUR",fit=catch_BOTHBIND_FLATSUR_loglin_sur,TAC.BOTHBIND.FLATSUR.whitefishdom )
+        CATCH.BOTHBIND.SURSUR <- predict.catch.function(model="SUR",fit=catch_BOTHBIND_loglin_sur,TAC.BOTHBIND )
+        CATCH.BOTHBIND.SUROLS <- predict.catch.function(model="OLS",fit = catch_BOTHBIND_loglin_ols,TAC.BOTHBIND )
         
+        TAC.BOTHBINDICATOR.SUR <- predict.tac.function(predictmethod = 1, model="SUR_WFDOM",fit=tac_BOTHBINDICATOR_loglin_sur,FISH.DATA)
+        TAC.BOTHBINDICATOR.SUR$ABCboth.UB.150 <- as.numeric(TAC.BOTHBINDICATOR.SUR$ABC.BS.201 + TAC.BOTHBINDICATOR.SUR$ABC.BSAI.202 >= 1.50e6*1.1)
+        
+        CATCH.BOTHBINDICATOR.SUROLS <- predict.catch.function(model="OLS",fit=catch_BOTHBINDICATOR_loglin_ols,TAC.BOTHBIND.FLATSUR)
+        
+        TAC.BOTHBIND.NOFIRSTYEAR.SUR <- predict.tac.function(predictmethod = 1, model="SUR_WFDOM",fit=tac_BOTHBIND_NOFIRSTYEAR_loglin_sur,FISH.DATA)
+        TAC.BOTHBIND.NOFIRSTYEAR.SUR$ABCboth.UB.150 <- as.numeric(TAC.BOTHBIND.NOFIRSTYEAR.SUR$ABC.BS.201 + TAC.BOTHBIND.NOFIRSTYEAR.SUR$ABC.BSAI.202 >= 1.50e6*1.1)
+        
+        CATCH.BOTHBIND.NOFIRSTYEAR.SUROLS <- predict.catch.function(model="OLS",fit=catch_BOTHBIND_NOFIRSTYEAR_loglin_ols,TAC.BOTHBIND.FLATSUR)
+      
     } else if (scenario == 3) {
-        #flatfish dom
-        TAC.BOTHBIND.FLATSUR.flatfishdom <- predict.tac.function(predictmethod = 1,model="FLAT_FFDOM",fit=tac_BOTHBIND_FLATSUR_loglin_sur,FISH.DATA)
-        TAC.BOTHBIND.FLATSUR.flatfishdom$ABCboth.UB.150 <- as.numeric(TAC.BOTHBIND.FLATSUR.flatfishdom$ABC.BS.201 + TAC.BOTHBIND.FLATSUR.flatfishdom$ABC.BSAI.202 >= 1.50e6*0.9)
- 
-        TAC.BOTHBIND.flatfishdom <- predict.tac.function(predictmethod = 1,model="SUR_FFDOM",fit=tac_BOTHBIND_loglin_sur,FISH.DATA)
-        TAC.BOTHBIND.flatfishdom$ABCboth.UB.150 <- as.numeric(TAC.BOTHBIND.flatfishdom$ABC.BS.201 + TAC.BOTHBIND.flatfishdom$ABC.BSAI.202 >= 1.50e6*0.9)
+        # flatfish gets more TAC
+        TAC.BOTHBIND <- predict.tac.function(predictmethod = 1, model="SUR_FFDOM",fit=tac_BOTHBIND_loglin_sur,FISH.DATA)
+        TAC.BOTHBIND$ABCboth.UB.150 <- as.numeric(TAC.BOTHBIND$ABC.BS.201 + TAC.BOTHBIND$ABC.BSAI.202 >= 1.50e6*0.9)
         
-       CATCH.BOTHBIND.SURSUR <- predict.catch.function(model="SUR_FFDOM",fit=catch_BOTHBIND_loglin_sur,TAC.BOTHBIND.flatfishdom )
-        CATCH.BOTHBIND.SUROLS <- predict.catch.function(model="NOSUR_FFDOM",fit = catch_BOTHBIND_loglin_nosur,TAC.BOTHBIND.flatfishdom )
-        CATCH.BOTHBIND.FLATSUR.SURSUR <- predict.catch.function(model="FLATSUR_FFDOM",fit=catch_BOTHBIND_FLATSUR_loglin_sur,TAC.BOTHBIND.FLATSUR.flatfishdom )
+        CATCH.BOTHBIND.SURSUR <- predict.catch.function(model="SUR",fit=catch_BOTHBIND_loglin_sur,TAC.BOTHBIND )
+        CATCH.BOTHBIND.SUROLS <- predict.catch.function(model="OLS",fit = catch_BOTHBIND_loglin_ols,TAC.BOTHBIND )
+        
+        TAC.BOTHBINDICATOR.SUR <- predict.tac.function(predictmethod = 1, model="SUR_FFDOM",fit=tac_BOTHBINDICATOR_loglin_sur,FISH.DATA)
+        TAC.BOTHBINDICATOR.SUR$ABCboth.UB.150 <- as.numeric(TAC.BOTHBINDICATOR.SUR$ABC.BS.201 + TAC.BOTHBINDICATOR.SUR$ABC.BSAI.202 >= 1.50e6*0.9)
+        
+        CATCH.BOTHBINDICATOR.SUROLS <- predict.catch.function(model="OLS",fit=catch_BOTHBINDICATOR_loglin_ols,TAC.BOTHBIND.FLATSUR)
+        
+        TAC.BOTHBIND.NOFIRSTYEAR.SUR <- predict.tac.function(predictmethod = 1, model="SUR_FFDOM",fit=tac_BOTHBIND_NOFIRSTYEAR_loglin_sur,FISH.DATA)
+        TAC.BOTHBIND.NOFIRSTYEAR.SUR$ABCboth.UB.150 <- as.numeric(TAC.BOTHBIND.NOFIRSTYEAR.SUR$ABC.BS.201 + TAC.BOTHBIND.NOFIRSTYEAR.SUR$ABC.BSAI.202 >= 1.50e6*0.9)
+        
+        CATCH.BOTHBIND.NOFIRSTYEAR.SUROLS <- predict.catch.function(model="OLS",fit=catch_BOTHBIND_NOFIRSTYEAR_loglin_ols,TAC.BOTHBIND.FLATSUR)
     }
     
     
     
     # create ensemble
     # 
-    CATCH.PRED <- (CATCH.BOTHBIND.SURSUR + CATCH.BOTHBIND.SUROLS + CATCH.BOTHBIND.FLATSUR.SURSUR)/3
+    CATCH.PRED <- (CATCH.BOTHBIND.SURSUR + CATCH.BOTHBIND.SUROLS + CATCH.BOTHBINDICATOR.SUROLS + CATCH.BOTHBIND.NOFIRSTYEAR.SUROLS)/4
     
     output <- CATCH.PRED[c("CATCH.BS.141",
                            "CATCH.BS.204",
