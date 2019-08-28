@@ -2,7 +2,7 @@ removefromcap_catch <- function(ABC.DATA,scenario,spptomult,improvedcatchscale) 
     
     FISH.DATA <- ABC.DATA
     FISH.DATA$ABCboth <- FISH.DATA$ABC.BSAI.202 + FISH.DATA$ABC.BS.201
-    FISH.DATA$ABCboth2 <- <- pmin(FISH.DATA$ABCboth,1.5e6)
+    FISH.DATA$ABCboth2 <- pmin(FISH.DATA$ABCboth,1.5e6)
     FISH.DATA$ABCboth.UB.150 <- as.numeric(FISH.DATA$ABC.BS.201 + FISH.DATA$ABC.BSAI.202 >= 1.5e6)
     FISH.DATA$pollock.bs.UB <-  as.numeric(FISH.DATA$ABC.BS.201 > 1.2e6)
     
