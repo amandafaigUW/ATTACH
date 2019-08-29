@@ -253,7 +253,7 @@ ATTACH_function <- function(scenario,
     }
 
 
-# Third, pick only species that were passed in to pass back out.
+#Third, pick only species that were passed in to pass back out.
 output <- catch[!missingspp]
 colnames(output) <- sppnames[!missingspp]
 output[is.na(output)] <- 0
@@ -262,7 +262,7 @@ if (scenario == 5.1 | scenario == 5.3 | scenario == 5.4) {  # in scenario 5 over
     for (i in 1:length(spptomult)) {
         eval(parse(text = paste("output$",spptomult[i],"<-",spptomult[i],"*",multiplier[i],sep="")))
     }
-} 
+}
 
 return(output)
 # return(ABC.DATA)
