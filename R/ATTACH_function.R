@@ -9,7 +9,6 @@
 #' 
 #' Currently programmed scenarios: \cr
 #' Scenario 1: Status Quo (Log-Linear) \cr
-#' Scenario 1.1: Status Quo alternative: Log-Log \cr
 #' Scenario 2: Whitefish (Pollock and Cod) Political (aka TAC-setting) Preference \cr
 #' Scenario 3: Flatfish Political (aka TAC-setting) Preference \cr
 #' Scenario 4: No Fishing (will return all zeros) \cr

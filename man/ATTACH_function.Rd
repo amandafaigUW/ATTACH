@@ -5,9 +5,9 @@
 \title{ATTACH Function}
 \usage{
 ATTACH_function(scenario, Arrowtooth, Atka, Flathead, Greenland, Kamchatka,
-  Northern, Octopus, OtherFlat, OtherRock, PCod, Plaice, POP, Pollock, Rock,
-  Rougheye, Sablefish, Sculpin, Shark, Shortraker, Skate, Squid, Yellowfin,
-  spptomult, multiplier, improvedcatchscale)
+  Northern, Octopus, OtherFlat, OtherRock, PCod, Plaice, POP, Pollock,
+  Rock, Rougheye, Sablefish, Sculpin, Shark, Shortraker, Skate, Squid,
+  Yellowfin, spptomult, multiplier, improvedcatchscale)
 }
 \arguments{
 \item{scenario}{The economic scenario number. Current options: 1, 1.1, 2, 3, 4, 5.1, 5.2, or 5.3}
@@ -71,7 +71,6 @@ This version created Aug 26 2019
 
 Currently programmed scenarios: \cr
 Scenario 1: Status Quo (Log-Linear) \cr
-Scenario 1.1: Status Quo alternative: Log-Log \cr
 Scenario 2: Whitefish (Pollock and Cod) Political (aka TAC-setting) Preference \cr
 Scenario 3: Flatfish Political (aka TAC-setting) Preference \cr
 Scenario 4: No Fishing (will return all zeros) \cr
